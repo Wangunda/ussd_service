@@ -33,13 +33,13 @@ git clone https://github.com/your-username/ussd-service.git
 cd ussd-service
 
 
-### 2. Initialize Node.js Project
+2. Initialize Node.js Project
 
 If starting fresh:
 
 npm init -y
 
-### 3. Install Required Packages
+3. Install Required Packages
 npm install express body-parser pg africastalking
 
 
@@ -47,14 +47,14 @@ For local dev testing:
 
 npm install --save-dev nodemon
 
-### 4. Setup Database (Neon PostgreSQL)
-#### a. Create Database
+4. Setup Database (Neon PostgreSQL)
+a. Create Database
 
 Log in to Neon
 
 Create a new project → new database named ussd_db
 
-#### b. Get Connection String
+b. Get Connection String
 
 Copy the connection string from Neon Dashboard:
 
@@ -63,7 +63,7 @@ postgres://<USER>:<PASSWORD>@ep-xxxxxxx-pooler.c-2.us-east-1.aws.neon.tech/ussd_
 
 ⚠️ Remove &channel_binding=require if it’s in the URL (Node pg does not support it).
 
-#### c. Create Tables
+c. Create Tables
 
 Connect via terminal:
 
@@ -84,13 +84,13 @@ CREATE TABLE entries (
 
 (Optional: create a clerks table if you want strict clerk validation.)
 
-#### 5. Project Structure
+5. Project Structure
 ussd-service/
 │── index.js        # Main Express server
 │── db.js           # Database connection
 │── package.json
 
-#### 6. Database Connection (db.js)
+6. Database Connection (db.js)
 const { Pool } = require("pg");
 
 const pool = new Pool({
@@ -106,8 +106,6 @@ module.exports = pool;
 In .env.local (or Vercel Environment Variables):
 
 DATABASE_URL=postgres://<USER>:<PASSWORD>@ep-xxxxxx-pooler.c-2.us-east-1.aws.neon.tech/ussd_db?sslmode=require
-AT_API_KEY=your_africastalking_api_key
-AT_USERNAME=sandbox   # or your AT username
 
 8. Run Locally
 node index.js
