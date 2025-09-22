@@ -1,11 +1,10 @@
-const { Pool } = require("pg");
+// db.js
+const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",      // or your cloud host
-  database: "ussd_db",
-  password: "Haust",
-  port: 5432,             // default postgres port
+  connectionString: process.env.DATABASE_URL || undefined,
+  // If you get SSL errors, you can try forcing SSL options:
+  ssl: { rejectUnauthorized: false } // only if necessary
 });
 
 module.exports = pool;
